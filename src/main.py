@@ -15,6 +15,7 @@ def status(args):
 
 def main() -> int:
     parser = argparse.ArgumentParser(prog="reblog", description="static blog generator")
+    parser.add_argument('-v', '--version', action='version', version='%(prog)s version 0.1.0')
 
     subparsers = parser.add_subparsers(help='available commands')
 
