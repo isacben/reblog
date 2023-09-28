@@ -14,7 +14,16 @@ def convert_one_file(filename: str) -> None:
     html_string += markdown.markdown(markdown_string)
     html_string += helpers.get_footer()
 
-    output = os.path.abspath(filename).split('.')[0] + '.html'
+    dirname = os.path.dirname(os.path.dirname(filename))
+
+    if not os.path.exists(dirname + '/html'):
+        os.mkdir(dirname + '/html')
+
+    output = dirname + \
+        "/html/" + \
+        os.path.basename(filename).split('.')[0] + \
+        '.html'
+
     with open(output, 'w') as f:
         f.write(html_string)
 
