@@ -10,11 +10,18 @@ def convert_one_file(filename: str) -> None:
     with open(filename, 'r') as f:
         markdown_string = f.read()
 
-    html_string = helpers.get_header()
-    html_string += markdown.markdown(markdown_string)
-    html_string += helpers.get_footer()
-
     dirname = os.path.dirname(os.path.dirname(filename))
+
+    html_string = helpers.get_html_template()
+    html_string = html_string.replace(
+        "%reblog-content%", 
+        markdown.markdown(markdown_string, extensions=['tables']))
+
+    # check if there is content for a sidebar
+    if os.path.exists(dirname + '/md/_sidebar.md'):
+        with open(dirname + '/md/_sidebar.md', 'r') as f:
+            sidebar = f.read()
+        html_string = html_string.replace('%reblog-sidebar%', markdown.markdown(sidebar))
 
     if not os.path.exists(dirname + '/html'):
         os.mkdir(dirname + '/html')
