@@ -33,6 +33,8 @@ def convert_one_file(filename: str) -> None:
 
     with open(output, 'w') as f:
         f.write(html_string)
+    
+    helpers.update_home_page(dirname)
 
 def convert_file(args: List[str]) -> None:
     convert_one_file(args.name)
