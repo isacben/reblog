@@ -38,6 +38,7 @@ def update_home_page(directory: str) -> None:
                 """
                 posts += str(title)
                 posts += '<p class="card-text">' + text + '</p>'
+                posts += '<a href="#" class="stretched-link">Read more</a>'
                 print(title)
                 posts += """
                             </div>
