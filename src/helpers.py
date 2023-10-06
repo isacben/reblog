@@ -28,18 +28,30 @@ def update_home_page(directory: str) -> None:
                 title = soup.find('h1')
                 title.name = 'h5'
 
-                text = soup.find('p').get_text()
+                try:
+                    text = soup.find('p').get_text()
+                except:
+                    text = ''
+                    print(f'File <{md_file}> had no paragraphs.')
+                
+                link_filename = md_file.split(".")[0]
 
                 posts += """
                     <div class="col">
                         <div class="card">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body">
-                """
+                    """
+                
+                try:
+                    image = soup.find('img')['src']
+                    print(image)
+                    posts += f'<img src="{image}" class="card-img-top" alt="...">'
+                except:
+                    pass
+
+                posts += '<div class="card-body">'
                 posts += str(title)
                 posts += '<p class="card-text">' + text + '</p>'
-                posts += '<a href="#" class="stretched-link">Read more</a>'
-                print(title)
+                posts += f'<a href="{link_filename}.html" class="stretched-link">Read more</a>'
                 posts += """
                             </div>
                         </div>
