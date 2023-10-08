@@ -57,17 +57,17 @@ def main() -> int:
     parser_file.add_argument('name', help='the file name')
     parser_file.set_defaults(func=convert_file)
 
-    parser_dir = subparsers.add_parser('dir', help='convert all files in a directory to html')
-    parser_dir.add_argument('path', help='the path of the directory')
-    parser_dir.set_defaults(func=convert_dir)
+    # parser_dir = subparsers.add_parser('dir', help='convert all files in a directory to html')
+    # parser_dir.add_argument('path', help='the path of the directory')
+    # parser_dir.set_defaults(func=convert_dir)
 
-    parser_upload = subparsers.add_parser('upload', help='upload a file or directory to the server')
-    parser_upload.add_argument('name', help='the file or directory name')
-    parser_upload.set_defaults(func=upload)
+    # parser_upload = subparsers.add_parser('upload', help='upload a file or directory to the server')
+    # parser_upload.add_argument('name', help='the file or directory name')
+    # parser_upload.set_defaults(func=upload)
 
-    parser_status= subparsers.add_parser('status', help='show the working tree status')
-    parser_status.add_argument('path', help='the directory name')
-    parser_status.set_defaults(func=status)
+    # parser_status= subparsers.add_parser('status', help='show the working tree status')
+    # parser_status.add_argument('path', help='the directory name')
+    # parser_status.set_defaults(func=status)
 
     args = parser.parse_args()
     args.func(args)
