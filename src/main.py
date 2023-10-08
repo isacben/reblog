@@ -17,11 +17,9 @@ def convert_one_file(filename: str) -> None:
         "%reblog-content%", 
         markdown.markdown(markdown_string, extensions=['tables']))
 
-    # check if there is content for a sidebar
-    if os.path.exists(dirname + '/md/_sidebar.md'):
-        with open(dirname + '/md/_sidebar.md', 'r') as f:
-            sidebar = f.read()
-        html_string = html_string.replace('%reblog-sidebar%', markdown.markdown(sidebar))
+    html_string = helpers.insert_side_bar(dirname, html_string)
+
+    html_string = helpers.format_post(html_string)
 
     if not os.path.exists(dirname + '/html'):
         os.mkdir(dirname + '/html')
