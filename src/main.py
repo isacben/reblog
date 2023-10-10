@@ -1,8 +1,10 @@
 import markdown
 import argparse 
 import os
-import sys
+import tomllib
 import helpers
+
+from bs4 import BeautifulSoup
 
 from typing import List
 
@@ -16,10 +18,18 @@ def convert_one_file(filename: str) -> None:
     html_string = html_string.replace(
         "%reblog-content%", 
         markdown.markdown(markdown_string, extensions=['tables']))
+    
+    soup = BeautifulSoup(html_string, "html.parser")
+    html_string = html_string.replace("%reblog-title%", soup.find('h1').get_text())
 
     html_string = helpers.insert_side_bar(dirname, html_string)
 
     html_string = helpers.format_post(html_string)
+
+    with open(dirname + "/site.toml", "rb") as f:
+        site_conf = tomllib.load(f)
+    
+    html_string = html_string.replace("%reblog-navbar-title%", site_conf['name'])
 
     if not os.path.exists(dirname + '/html'):
         os.mkdir(dirname + '/html')

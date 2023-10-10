@@ -25,6 +25,12 @@ Now, create your first post by adding an md file. For example, `your-post.md`.
 
 You will also need to create the file `_sidebar.md`. Add any information you want to present in the sidebar of your blog.
 
+You will also need to create a configuration file called `site.toml` at the root directory of your blog., This file should contain the following:
+
+```
+name = "A name for your blog"
+```
+
 Once you have an md file and the sidebar, generate the html version  of your blog running this command:
 
 ```
@@ -44,6 +50,7 @@ After running this command, your site file structure will look like this:
         - your-post.html
     - img
         - your-post-image-if-you-added-one.png
+    - site.toml
 
 Finally, upload the `html` and `img` directories to your web server.
 

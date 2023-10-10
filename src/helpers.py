@@ -1,6 +1,8 @@
 import os
 import sys
 import markdown
+import tomllib
+
 from bs4 import BeautifulSoup
 
 from typing import List
@@ -72,6 +74,13 @@ def update_home_page(directory: str) -> None:
     posts += '</div>'
 
     html_string = html_string.replace("%reblog-content%", posts)
+
+    with open(directory + "/site.toml", "rb") as f:
+        site_conf = tomllib.load(f)
+
+    html_string = html_string.replace("%reblog-title%", site_conf['name'])
+    html_string = html_string.replace("%reblog-navbar-title%", site_conf['name'])
+
     html_string = insert_side_bar(directory, html_string)
 
     output = directory + '/html/index.html'
